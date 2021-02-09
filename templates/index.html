@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Leca Calculator</title>
+</head>
+<body>
+    <div class="page-wrapper">
+        <h1>Leca Calculator</h1>
+        <div class="grid-container">
+            <div class="grid-4-span-col" id="input">&nbsp;</div>
+            <div class="grid-item" id="divider" onclick="clicked(this)">/</div>
+            <div class="grid-item" id="multiplier" onclick="clicked(this)">*</div>
+            <div class="grid-item" id="clear" onclick="clicked(this)">C</div>
+            <div class="grid-item" id="delete" onclick="clicked(this)">del</div>
+            <div class="grid-item" id="seven" onclick="clicked(this)">7</div>
+            <div class="grid-item" id="eight" onclick="clicked(this)">8</div>
+            <div class="grid-item" id="nine" onclick="clicked(this)">9</div>
+            <div class="grid-item" id="plus" onclick="clicked(this)">+</div>
+            <div class="grid-item" id="four" onclick="clicked(this)">4</div>
+            <div class="grid-item" id="five" onclick="clicked(this)">5</div>
+            <div class="grid-item" id="six" onclick="clicked(this)">6</div>
+            <div class="grid-item" id="minus" onclick="clicked(this)">-</div>
+            <div class="grid-item" id="one" onclick="clicked(this)">1</div>
+            <div class="grid-item" id="two" onclick="clicked(this)">2</div>
+            <div class="grid-item" id="three" onclick="clicked(this)">3</div>
+            <div class="grid-item grid-2-span-row" id="equal" onclick="clicked(this)">=</div>
+            <div class="grid-item grid-2-span-col" id="zero" onclick="clicked(this)">0</div>
+            <div class="grid-item" id="comma" onclick="clicked(this)">,</div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
