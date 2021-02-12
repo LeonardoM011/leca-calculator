@@ -1,34 +1,65 @@
+// USER DEFINED VARIABLES
+
+const MAX_CHAR = 12;
+
+// -------------------------
+
 let div_input = document.getElementById("input");
 
-/*let div_divider = document.getElementById("divider");
-let div_multiplier = document.getElementById("multiplier");
-let div_clear = document.getElementById("clear");
-let div_delete = document.getElementById("delete");
-let div_minus = document.getElementById("minus");
-let div_equal = document.getElementById("equal");
-let div_comma = document.getElementById("comma");
-
-let div_zero = document.getElementById("zero");
-let div_one = document.getElementById("one");
-let div_two = document.getElementById("two");
-let div_three = document.getElementById("three");
-let div_four = document.getElementById("four");
-let div_five = document.getElementById("five");
-let div_six = document.getElementById("six");
-let div_seven = document.getElementById("seven");
-let div_eight = document.getElementById("eight");
-let div_nine = document.getElementById("nine");*/
-
 let content = "";
-let first_half = 0;
-let second_half = 0;
-let is_second_half = false;
+
+function isCharNumber(chr) {
+    let num = Number(chr);
+    if (num >= 0 && num <= 9)
+        return true;
+    return false;
+}
+
+function calculate(str) {
+    
+    let cont = [];
+    let res = 0;
+
+    // if last character is special character remove it
+    if (!isCharNumber(str.slice(-1))) {
+        str = str.slice(0, -1);
+    }
+
+    // Split string with signs at the end
+    let n = str.length;
+    let tmp = "";
+    for (let i = 0; i < n; i++) {
+        if (!isCharNumber(str[i])) {
+            cont.push({ "num" : Number(tmp), "sign" : str[i]});
+            tmp = "";
+            continue;
+        }
+        
+        tmp += str[i];
+    }
+    cont.push({ "num" : Number(tmp), "sign" : ""});
+    
+    // Actually calculate whole string with signs
+    let signs = [ ['*', '/'], ['+', '-'] ];
+    for (let i = 0; i < 2; i++) {
+        n = cont.length;
+        for (let j = 0; j < n; j++) {
+            if (cont.sign == signs[i][0]) {
+                
+            } 
+            else if (cont.sign == signs[i][1]) {
+
+            }
+        }
+    }
+
+    /*for (let i = 0; i < cont.length; i++) {
+        alert(cont[i].num + " " + cont[i].sign);
+    }*/
+}
 
 function clearall() {
     content = "";
-    first_half = 0;
-    second_half = 0;
-    is_second_half = false
 }
 
 function clicked(element) {
@@ -42,20 +73,34 @@ function clicked(element) {
             // Removes last letter
             content = content.slice(0, -1);
             break;
-
-        case "+":
-            
+        case ",":
+            // TODO: Float numbers
+            break;
+        case "=":
+            calculate(content);
             break;
         default:
-            if (div_content >= 0 && div_content <= 9) {
-                if(content.length > 12) 
+            // If it's a number
+            if (isCharNumber(div_content)) {
+                // If it's longer than defined
+                if(content.length > MAX_CHAR) 
+                    return;
+                content += div_content;
+            }
+            // If it's a character / * + -
+            else {
+                // Can't be first char
+                if (content == "")
+                    return;
+                // If it's longer than defined or if the special character is 2 times in a row
+                if (content.length > MAX_CHAR || !isCharNumber(content.slice(-1))) 
                     return;
                 content += div_content;
             }
     }
 
     // If content is empty add &nbsp so that div_input doesn't collapse else just set it to content
-    if(content.length == 0) {
+    if (content.length == 0) {
         div_input.innerHTML = "&nbsp"
         return;
     }

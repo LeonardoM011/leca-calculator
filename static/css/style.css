@@ -8,7 +8,9 @@ html {
     background-image: linear-gradient(yellow, green);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%;
+    min-height: 100%;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 h1 {
@@ -83,7 +85,7 @@ h1 {
 }
 
 #equal {
-    color: orange;
+    color: purple;
     font-family: 'Sriracha', cursive;
     font-weight: bold;
     font-size: 48px;
