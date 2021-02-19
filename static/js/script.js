@@ -30,32 +30,48 @@ function calculate(str) {
     let tmp = "";
     for (let i = 0; i < n; i++) {
         if (!isCharNumber(str[i])) {
-            cont.push({ "num" : Number(tmp), "sign" : str[i]});
+            cont.push({ "num" : Number(tmp), "sign" : str[i] });
             tmp = "";
             continue;
         }
         
         tmp += str[i];
     }
-    cont.push({ "num" : Number(tmp), "sign" : ""});
+    cont.push({ "num" : Number(tmp), "sign" : "" });
     
     // Actually calculate whole string with signs
     let signs = [ ['*', '/'], ['+', '-'] ];
     for (let i = 0; i < 2; i++) {
         n = cont.length;
-        for (let j = 0; j < n; j++) {
-            if (cont.sign == signs[i][0]) {
-                
-            } 
-            else if (cont.sign == signs[i][1]) {
 
+        for (let j = 0; j < n; j++) {
+            // Check if its multiplication first then for addition
+            if ((cont[j]).sign == signs[i][0] || (cont[j]).sign == signs[i][1]) {
+                switch ((cont[j]).sign) {
+                    case '*':
+                        res = (cont[j]).num * (cont[j + 1]).num;
+                        break;
+                    case '/':
+                        res = (cont[j]).num / (cont[j + 1]).num;
+                        break;
+                    case '+':
+                        res = (cont[j]).num + (cont[j + 1]).num;
+                        break;
+                    case '-':
+                        res = (cont[j]).num - (cont[j + 1]).num;
+                        break;
+                }
+                // Set next object in a row to result then delete this object
+                (cont[j + 1]).num = res;
+                cont.splice(j, 1);
+                // Basically repeat this whole section
+                n--;
+                i--
             }
         }
     }
-
-    /*for (let i = 0; i < cont.length; i++) {
-        alert(cont[i].num + " " + cont[i].sign);
-    }*/
+    // Return the last number standing
+    return (cont[0]).num;
 }
 
 function clearall() {
@@ -77,7 +93,8 @@ function clicked(element) {
             // TODO: Float numbers
             break;
         case "=":
-            calculate(content);
+            // Cast result to string and add it to content
+            content = String(calculate(content));
             break;
         default:
             // If it's a number
@@ -89,12 +106,15 @@ function clicked(element) {
             }
             // If it's a character / * + -
             else {
-                // Can't be first char
+                // Can't be the first char
                 if (content == "")
                     return;
                 // If it's longer than defined or if the special character is 2 times in a row
-                if (content.length > MAX_CHAR || !isCharNumber(content.slice(-1))) 
-                    return;
+                if (content.length > MAX_CHAR || !isCharNumber(content.slice(-1))) {
+                    // Just replace last character with new character
+                    content = content.slice(0, -1);
+                }
+
                 content += div_content;
             }
     }
