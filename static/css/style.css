@@ -33,7 +33,7 @@ h1 {
     max-width: 500px;
     margin: 0 auto;
     padding: 15px;
-    background-image: linear-gradient(rgb(149, 147, 255), blue);
+    background-image: linear-gradient(rgb(149, 147, 255), rgb(65, 65, 255));
     grid-template-columns: auto auto auto auto;
     grid-row-gap: 10px;
     grid-column-gap: 15px;

@@ -36,6 +36,10 @@
             <div class="grid-item" id="comma" onclick="clicked(this)">,</div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
