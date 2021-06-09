@@ -1,4 +1,4 @@
 # LecaCalc
-My take on calculator web app using sqllite3 database and flask app
+My take on calculator web app using sqlalchemy database and flask app
 
-To run open ./start.sh
+To run open ./start.sh in WSL

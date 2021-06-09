@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, render_template, redirect
+from datetime import datetime
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -6,8 +7,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-class Todo(db.Model):
+class History(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
     content = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
@@ -16,11 +18,12 @@ class Todo(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        history = History.query.order_by(History.id).all()
+        return render_template('index.html', history=history)
     elif request.method == 'POST':
 
         task_content = request.json
-        new_task = Todo(content=task_content)
+        new_task = History(content=task_content)
         try:
             db.session.add(new_task)
             db.session.commit()

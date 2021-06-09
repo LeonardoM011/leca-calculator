@@ -20,6 +20,14 @@ h1 {
     font-size: 72px;
 }
 
+h2 {
+    text-align: center;
+    font-weight: lighter;
+    font-family: 'Pangolin', cursive;
+    padding: 20px 0 10px;
+    font-size: 48px;
+}
+
 .page-wrapper {
     max-width: 768px;
     margin: 0 auto;
@@ -27,7 +35,6 @@ h1 {
 }
 
 /*** GRID ***/ 
-
 .grid-container {
     display: grid;
     max-width: 500px;
@@ -93,5 +100,22 @@ h1 {
     align-items: center;
     justify-content: center;
 }
-
 /************/
+
+/*** TABLE ***/ 
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    border: 3px solid black;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+}
+
+td {
+    text-align: center;
+    font-size: 18px;
+}
+/*************/

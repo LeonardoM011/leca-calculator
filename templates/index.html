@@ -35,6 +35,17 @@
             <div class="grid-item grid-2-span-col" id="zero" onclick="clicked(this)">0</div>
             <div class="grid-item" id="comma" onclick="clicked(this)">,</div>
         </div>
+        <h2>History</h2>
+        <table id="history">
+            {% for tab in history %}
+            <tr>
+                <td>{{ tab.date_created.strftime("%d/%m/%y %H:%M") }}</td>
+                <td>{{ tab.content }}</td>
+            </tr>
+            {% endfor %}
+            <tr></tr>
+        </table>
+        <br>
     </div>
     <script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
     <script type=text/javascript>

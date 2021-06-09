@@ -3,8 +3,8 @@
 const MAX_CHAR = 12;
 
 // -------------------------
-
 let div_input = document.getElementById("input");
+let table_history = document.getElementById("history");
 
 let content = "";
 let result = "";
@@ -29,7 +29,6 @@ function calculate(str) {
     if (str.length > 0) {
         str = eval(str);
     }
-
     return str;
 }
 
@@ -41,6 +40,14 @@ function updateDiv(str) {
     // Update html element with content
     div_input.innerHTML = content;
     return content;
+}
+
+function updateTable(num, str) {
+    let row = table_history.insertRow(-1);
+    let cell1 = row.insertCell(0);
+    cell1.innerHTML = "0";
+    let cell2 = row.insertCell(1);
+    cell2.innerHTML = str;
 }
 
 function clicked(element) {
@@ -84,14 +91,11 @@ function clicked(element) {
                 if (content.length > MAX_CHAR || !isCharNumber(content.slice(-1))) {
                     // Just replace last character with new character
                     content = content.slice(0, -1);
-                    
                 }
-
                 // If its not first char or - sign add it to content
                 if (content.length > 0 || div_content == '-') {
                     content += div_content;
                 }
-                
             }
     }
 
@@ -113,7 +117,9 @@ function postResult(str) {
         data: JSON.stringify(str),
         contentType: 'application/json;charset=UTF-8',
         success: function (data) {
+            updateTable(0, str);
             console.log(data);
+            
         }
     });
 }
