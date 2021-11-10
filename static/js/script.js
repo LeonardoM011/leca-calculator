@@ -9,6 +9,17 @@ let table_history = document.getElementById("history");
 let content = "";
 let result = "";
 
+function getDate() {
+    var now = new Date();
+    d = now.getDate().toString().padStart(2, '0');
+    m = now.getMonth() + 1;
+    m = m.toString().padStart(2, '0');
+    y = now.getFullYear().toString().slice(2).padStart(2, '0');
+    h = now.getHours().toString().padStart(2, '0');
+    M = now.getMinutes().toString().padStart(2, '0');
+    return '' + d + '/' + m + '/' + y + ' ' + h + ':' + M;
+}
+
 function isCharNumber(chr) {
     let num = Number(chr);
     if (num >= 0 && num <= 9)
@@ -45,7 +56,7 @@ function updateDiv(str) {
 function updateTable(num, str) {
     let row = table_history.insertRow(-1);
     let cell1 = row.insertCell(0);
-    cell1.innerHTML = "0";
+    cell1.innerHTML = num;
     let cell2 = row.insertCell(1);
     cell2.innerHTML = str;
 }
@@ -117,7 +128,8 @@ function postResult(str) {
         data: JSON.stringify(str),
         contentType: 'application/json;charset=UTF-8',
         success: function (data) {
-            updateTable(0, str);
+            // Getting date and time and putting it into a table
+            updateTable(getDate(), str);
             console.log(data);
             
         }
